@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Study Resource Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #e6f3ff;
+      color: #0f172a;
+    }
+
+    /* Topbar */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: #123b88;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .topbar-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .topbar-profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .topbar-profile span {
+      font-size: 14px;
+    }
+
+    .topbar-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    /* Profile dropdown toggle checkbox (hidden) */
+    #profileToggle {
+      display: none;
+    }
+
+    /* Label toggles the dropdown */
+    label[for="profileToggle"] {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Dropdown menu */
+    .profile-menu {
+      position: absolute;
+      top: 52px;
+      right: 0;
+      width: 260px;
+      background: #fff;
+      color: #0f172a;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.25);
+      padding: 12px 14px;
+      display: none;
+      user-select: auto;
+    }
+
+    /* Show dropdown when checked */
+    #profileToggle:checked + .profile-menu {
+      display: block;
+    }
+
+    .profile-menu-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .profile-menu-header img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-menu-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .profile-menu-email {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .profile-menu-item {
+      font-size: 14px;
+      padding: 6px 4px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0f172a;
+      display: block;
+    }
+
+    .profile-menu-item:hover {
+      background: #e5f0ff;
+    }
+
+    .profile-menu-footer {
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 13px;
+      color: #dc2626;
+      cursor: pointer;
+    }
+
+    /* Page content padding to avoid overlap with fixed topbar */
+    .page-content {
+      padding-top: 72px;
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+      text-align: center;
+      margin: 10px 0 8px;
+    }
+
+    h1 { color: #123b88; }
+    h2 { color: #0f2f6e; }
+    h3 { color: #0b4aad; margin-bottom: 6px; }
+
+    /* Paragraphs */
+    p {
+      margin: 6px 0;
+      text-align: center;
+    }
+
+    /* Images and videos */
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 8px;
+    }
+
+    video {
+      display: block;
+      margin: 0 auto 1em auto;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* List */
+    ul {
+      max-width: 1000px;
+      margin: 10px auto;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    /* Links */
+    a {
+      color: #0b6ab8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Table styles */
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      background: #fff;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    th, td {
+      border: 1px solid #cfe8ff;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eef6ff;
+      color: #123b88;
+    }
+
+    /* Logo */
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
+      margin: 8px auto;
+      display: block;
+    }
+
+    /* Notes */
+    .note {
+      color: #0b6ab8;
+      background: #dff1ff;
+      padding: 6px 10px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <div class="topbar">
+    <div class="topbar-title">Study Resource Hub</div>
+
+    <!-- Hidden checkbox for toggling dropdown -->
+    <input type="checkbox" id="profileToggle" />
+
+    <!-- Profile label to toggle menu -->
+    <label for="profileToggle" class="topbar-profile" tabindex="0" aria-haspopup="true" aria-controls="profileMenu">
+      <span>Hi, Muthu</span>
+      <img src="profile.png" alt="Profile" class="topbar-avatar" />
+    </label>
+
+    <!-- Profile dropdown -->
+    <div id="profileMenu" class="profile-menu" role="menu" aria-label="Profile menu">
+      <div class="profile-menu-header">
+        <img src="profile.png" alt="Profile" />
+        <div>
+          <div class="profile-menu-name">Muthu B</div>
+          <div class="profile-menu-email">muthub.2102@gmail.com</div>
+        </div>
+      </div>
+
+      <a href="#about-me" class="profile-menu-item" role="menuitem">View profile</a>
+      <a href="mailto:muthub.2102@gmail.com" class="profile-menu-item" role="menuitem">Contact support</a>
+      <a href="#account-settings" class="profile-menu-item" role="menuitem">Account settings</a>
+
+      <div class="profile-menu-footer" role="menuitem" tabindex="0">Log out</div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="page-content">
+
+    <img src="generated-image.png" alt="Logo" class="logo" />
+    <h1>Study Resource Hub</h1>
+    <h2>Your One‑Stop Solution for College Study Materials</h2>
+    <p><span class="note">8 Subjects • 100+ Resources • Always Free</span></p>
+
+    <img src="generated-image.png" alt="Study Resources" width="400" height="200" />
+    <br />
+    <video width="1000" height="420" controls autoplay muted loop>
+      <source src="intro vedio.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <h2>Explore Subjects</h2>
+
+    <!-- Subjects -->
+    <h3><a href="https://www.geeksforgeeks.org/c-programming-language/" target="_blank">C Programming</a></h3>
+    <p>Basics, loops, arrays, pointers, and more.</p>
+    <p><a href="https://www.geeksforgeeks.org/c-programming-language/" target="_top"><img src="c-programming.png" alt="C Programming" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.w3schools.com/python/" target="_blank">Python Programming</a></h3>
+    <p>Syntax, functions, file handling, and projects.</p>
+    <p><a href="https://www.w3schools.com/python/" target="_top"><img src="python-icon.png" alt="Python" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.w3schools.com/html/" target="_blank">HTML & CSS</a></h3>
+    <p>Build your first website step by step.</p>
+    <p><a href="https://www.w3schools.com/html/" target="_top"><img src="web-dev.png" alt="Web Development" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.khanacademy.org/math" target="_blank">Engineering Mathematics</a></h3>
+    <p>Calculus, Linear Algebra, Differential Equations.</p>
+    <p><a href="https://www.khanacademy.org/math" target="_top"><img src="math-icon.png" alt="Mathematics" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.physicsclassroom.com/" target="_blank">Engineering Physics</a></h3>
+    <p>Mechanics, Waves, Optics, Modern Physics.</p>
+    <p><a href="https://www.physicsclassroom.com/" target="_top"><img src="physics-icon.png" alt="Physics" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.annauniv.edu/" target="_blank">Previous Year Question Papers (PYQ)</a></h3>
+    <p>Download solved papers for all subjects.</p>
+    <p><a href="https://www.annauniv.edu/" target="_top"><img src="question-bank.png" alt="Question Papers" width="300" height="300" /></a></p>
+
+    <h3><a href="https://www.youtube.com/@freecodecamp" target="_blank">Free YouTube Tutorials</a></h3>
+    <p>CodeWithHarry, FreeCodeCamp, GeeksForGeeks.</p>
+    <p><a href="https://www.youtube.com/@freecodecamp" target="_top"><img src="youtube-learning.png" alt="YouTube Tutorials" width="300" height="300" /></a></p>
+
+    <h3><a href="https://education.github.com/pack" target="_blank">GitHub Student Developer Pack</a></h3>
+    <p>Free tools, cloud credits, and learning resources.</p>
+    <p><a href="https://education.github.com/pack" target="_top"><img src="github-student.png" alt="GitHub Student Pack" width="300" height="300" /></a></p>
+
+    <h2>Quick Links</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/c-programming-language/" target="_blank">C Programming – Notes & Tutorials</a></li>
+      <li><a href="https://www.w3schools.com/python/" target="_blank">Python – Beginner to Advanced</a></li>
+      <li><a href="https://www.w3schools.com/html/" target="_blank">HTML & CSS – Web Development</a></li>
+      <li><a href="https://www.khanacademy.org/math" target="_blank">Engineering Mathematics – Lectures</a></li>
+      <li><a href="https://www.physicsclassroom.com/" target="_blank">Engineering Physics – Notes & Practice</a></li>
+      <li><a href="https://www.annauniv.edu/" target="_blank">Previous Year Question Papers</a></li>
+      <li><a href="https://www.youtube.com/@freecodecamp" target="_blank">Free YouTube Tutorials</a></li>
+      <li><a href="https://education.github.com/pack" target="_blank">GitHub Student Developer Pack</a></li>
+    </ul>
+
+    <h2>Contact</h2>
+    <table>
+      <tr>
+        <th colspan="3">Resource Hub Contact Info</th>
+      </tr>
+      <tr>
+        <th rowspan="2">For Contact</th>
+        <td>123456789</td>
+        <td>987654321</td>
+      </tr>
+      <tr>
+        <td>Email Support</td>
+        <td>muthub.2102@gmail.com</td>
+      </tr>
+    </table>
+
+    <hr style="margin: 40px 0; border: none; border-top: 2px solid #cfe8ff;" />
+
+    <section id="about-me" style="background: #f5fbff; padding: 24px 0 18px 0; text-align: center;">
+      <h2 style="color: #123b88; margin-top: 0;">About Me</h2>
+      <img src="profile.png" alt="Profile" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #dff1ff; margin-bottom: 12px;" />
+      <p style="max-width: 700px; margin: 0 auto 12px auto; color: #345;">
+        <strong>Hi, I'm Muthu!</strong> I built and maintain Study Resource Hub on my own, so every page and resource comes from my personal dedication. My goal is to give all students simple, free access to the materials I wish I had when I started engineering. Thank you for supporting this project!
+      </p>
+      <p style="color: #194060; font-size: 15px;">
+        If you have any suggestions or want to connect, email me anytime at
+        <a href="mailto:muthub.2102@gmail.com">muthub.2102@gmail.com</a>
+      </p>
+    </section>
+
+    <p>For queries or suggestions: <a href="mailto:muthub.2102@gmail.com">muthub.2102@gmail.com</a></p>
+    <p>Connect with us on <a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
+
+    <p style="text-align: center;"><i>Keep learning, keep growing!</i></p>
+  </div>
+</body>
+</html>

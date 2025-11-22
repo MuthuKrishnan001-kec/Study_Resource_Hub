@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Study Resource Hub - Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #E3F2FD;
+      color: #0f172a;
+      min-height: 100vh;
+    }
+
+    /* Header bar */
+    header {
+      background: #E3F2FD;
+      border-bottom: 3px solid #b0bec5;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+    header a {
+      text-decoration: none;
+      color: #0D47A1;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      height: 32px;
+      margin-right: 8px;
+      display: block;
+    }
+
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 32px auto;
+      background: #fff;
+      padding: 32px 36px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(13, 71, 161, 0.15);
+    }
+
+    /* Title and subtitle */
+    h1 {
+      color: #0D47A1;
+      text-align: center;
+      margin: 0 0 12px;
+      font-weight: 700;
+      font-size: 2.25rem;
+    }
+    p.subtitle {
+      color: #334155;
+      text-align: center;
+      margin: 0 0 24px;
+      font-size: 1rem;
+    }
+
+    /* Form styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #0D47A1;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #b0bec5;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+      border-color: #0D47A1;
+      box-shadow: 0 0 8px rgba(13, 71, 161, 0.35);
+    }
+
+    /* Horizontal flex groups */
+    .flex-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .flex-row > div {
+      flex: 1;
+    }
+
+    button[type="submit"] {
+      margin-top: 16px;
+      background: #0D47A1;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      background: #083970;
+    }
+
+    /* Footer links */
+    .footer-text {
+      margin: 16px 0 0;
+      text-align: center;
+      color: #475569;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .footer-text a {
+      color: #0D47A1;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-text a:hover {
+      text-decoration: underline;
+      color: #083970;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .flex-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="file:///C:/PSWD%20WEB/Study%20resource%20hub.html.html" aria-label="Study Resource Hub homepage">
+      <img src="generated-image.png" alt="SRH logo" />
+      Study Resource Hub
+    </a>
+  </header>
+
+  <main class="container" role="main" aria-labelledby="register-title">
+    <img src="generated-image.png" alt="Study Resource Hub" style="display: block; margin: 0 auto 24px; height: 56px;" />
+
+    <h1 id="register-title">New Register</h1>
+    <p class="subtitle">Create your account</p>
+
+    <form action="file:///C:/PSWD%20WEB/Study%20resource%20hub.html.html" method="get" autocomplete="on" novalidate>
+      <div class="flex-row">
+        <div>
+          <label for="first">First Name</label>
+          <input id="first" type="text" name="firstname" placeholder="Enter first name" required />
+        </div>
+        <div>
+          <label for="last">Last Name</label>
+          <input id="last" type="text" name="lastname" placeholder="Enter last name" required />
+        </div>
+      </div>
+
+      <div class="flex-row">
+        <div>
+          <label for="dob">Date of Birth</label>
+          <input id="dob" type="date" name="dob" required />
+        </div>
+        <div>
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" placeholder="name@example.com" required />
+
+      <div class="flex-row">
+        <div>
+          <label for="pwd">Password</label>
+          <input id="pwd" type="password" name="password" placeholder="Create a password" required />
+        </div>
+        <div>
+          <label for="pwd2">Confirm Password</label>
+          <input id="pwd2" type="password" name="password2" placeholder="Re-enter password" required />
+        </div>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p class="footer-text">
+      Already have an account?
+      <a href="file:///C:/PSWD%20WEB/study%20resource%20hub%20login%20page.html" aria-label="Login to Study Resource Hub">Login</a>
+    </p>
+  </main>
+
+</body>
+</html>
